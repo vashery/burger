@@ -11,7 +11,6 @@ router.get("/", function (req, res) {
     var handlbearobject = {
       burgers: data
     };
-    console.log(data)
     res.render("index", handlbearobject);
   });
 });

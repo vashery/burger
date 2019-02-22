@@ -5,6 +5,7 @@ var connection = require("../config/connection.js");
 var orm = {
   selectAll: function(table, callback) {
     var query = "SELECT * FROM " + table + ";";
+    console.log(query);
     connection.query(query, function(err, result) {
       if (err) {
         throw err;
@@ -29,9 +30,9 @@ var orm = {
   },
 
   updateOne: function(table, value, id, callback) {
-    var queryString = "UPDATE " + table + " SET devoured=" + value + " WHERE id = " + id;
-    console.log(queryString);
-    connection.query(queryString, function(err, result) {
+    var query = "UPDATE " + table + " SET devoured=" + value + " WHERE id = " + id;
+    console.log(query);
+    connection.query(query, function(err, result) {
       if (err) {
         throw err;
       }
