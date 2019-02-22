@@ -4,9 +4,9 @@
 <form class="form-inline justify-content-center">
   <div class="form-group text-center mx-sm-3 mb-2">
     <label for="inputPassword2" class="sr-only"></label>
-    <input type="input" class="form-control" id="inputPassword2" placeholder="Add a new burger">
+    <input id="inputfield" type="input" class="form-control" id="inputPassword2" placeholder="Add a new burger">
   </div>
-  <button type="submit" class="btn btn-primary mb-2">Add</button>
+  <button id="submitbutton" type="submit" class="btn btn-primary mb-2">Add</button>
 </form>
 <br>
 <br>
@@ -17,11 +17,11 @@
       <div class="card-body">
         <ul class="list-group">
           {{#each burgers}}
-              {{#if this.devoured}}
-              {{else}}
-          <li class="list-group-item">{{this.burger_name}}<button type="submit"
-              class="btn btn-primary float-right">Consume</button></li>
-              {{/if}}
+          {{#if this.devoured}}
+          {{else}}
+          <li class="list-group-item">{{this.burger_name}}<button id={{this.id}} type="submit"
+              class="btn btn-primary float-right consumebutton">Consume</button></li>
+          {{/if}}
           {{/each}}
         </ul>
       </div>
@@ -35,7 +35,7 @@
           {{#each burgers}}
           {{#if this.devoured}}
           <li class="list-group-item">{{this.burger_name}}
-          {{/if}}
+            {{/if}}
           </li>
           {{/each}}
         </ul>
@@ -44,3 +44,38 @@
   </div>
 </div>
 </form>
+
+<script>
+  $(function () {
+    $(".consumebutton").on("click", function (event) {
+      var id = $(this).attr("id");
+      $.ajax("/api/burgers/" + id, {
+        type: "PUT",
+        data: {
+          "devoured": true
+        }
+      }).then(
+        function () {
+          location.reload();
+        }
+      );
+    });
+
+  $("#submitbutton").on("click", function (event) {
+    // Make sure to preventDefault on a submit event.
+    event.preventDefault();
+
+    // Send the POST request.
+    $.ajax("/api/burgers", {
+      type: "POST",
+      data: {
+        "name": $("#inputfield").val().trim()
+      }
+    }).then(
+      function () {
+        location.reload();
+      }
+    );
+  });
+  });
+</script>
