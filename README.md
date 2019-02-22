@@ -31,4 +31,4 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 
 ## Working example
 
-https://powerful-oasis-21395.herokuapp.com/
+https://glacial-crag-98589.herokuapp.com/
