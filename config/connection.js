@@ -1,8 +1,8 @@
 // Set up MySQL connection.
 var mysql = require("mysql");
 
-if (process.env.JAWSDB_URL) {
-  connection = mysql.createConnection(process.env.JAWSDB_URL)
+if (process.env.JAWSDB_MARIA_URL) {
+  connection = mysql.createConnection(process.env.JAWSDB_MARIA_URL)
 }
 else {
   var connection = mysql.createConnection({
@@ -12,7 +12,7 @@ else {
     password: "",
     database: "burgers_db"
   });
-}
+};
 
 
 // Make connection.
